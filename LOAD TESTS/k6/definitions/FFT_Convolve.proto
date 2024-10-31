@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package signal;
+
+
+message Complex {
+    double real = 1;
+    double imag = 2;
+}
+
+message SignalGrpc {
+    repeated Complex values = 1;
+}
+
+
+message FftConvolveRequest {
+    SignalGrpc signalx = 1;   
+    SignalGrpc signalh = 2;
+    bool shift = 3;  
+}
+
+
+message FftConvolveResponse {
+    repeated Complex result = 1; 
+}
+
+
+service SignalService {
+    rpc ComputeFftConvolve (FftConvolveRequest) returns (FftConvolveResponse);
+}
