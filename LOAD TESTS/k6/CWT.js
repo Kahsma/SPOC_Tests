@@ -2,10 +2,10 @@ import { Client, StatusOK } from 'k6/net/grpc';
 import { check, sleep } from 'k6';
 
 const client = new Client();
-client.load(['definitions'], 'Moving_Average_signal.proto');
+client.load(['definitions'], 'signal_CWT.proto');
 
 // Load JSON file during the initialization phase
-const data = JSON.parse(open('../signal100K.json'));
+const data = JSON.parse(open('../signal10K.json'));
 
 export default () => {
     client.connect('localhost:8081', { plaintext: true });
@@ -15,9 +15,9 @@ export default () => {
         signal: {
             values: data.values.map((complex) => ({ real: complex.real, imag: complex.imag }))
         },
-        start: 0.0,
-        end: 1.0,
-        numScales: 32
+        start: 1.0,
+        end: 1000.0,
+        numScales: 10
     };
 
     const response = client.invoke('signal.SignalService/ComputeCWT', request);

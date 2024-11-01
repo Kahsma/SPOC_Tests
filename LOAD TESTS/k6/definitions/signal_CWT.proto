@@ -8,10 +8,6 @@ message Complex {
     double imag = 2;
 }
 
-message respcoeffs{
-    repeated double coe = 1;
-}
-
 message SignalGrpc {
     repeated Complex values = 1;
 }
@@ -25,7 +21,7 @@ message CWTRequest {
 
 
 message CWTResponse  {
-    repeated respcoeffs coeffs = 1;
+    repeated SignalGrpc coeffs = 1;
 }
 
 
