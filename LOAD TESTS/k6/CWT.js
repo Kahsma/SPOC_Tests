@@ -5,10 +5,10 @@ const client = new Client();
 client.load(['definitions'], 'signal_CWT.proto');
 
 // Load JSON file during the initialization phase
-const data = JSON.parse(open('../signal10K.json'));
+const data = JSON.parse(open('../signal1K.json'));
 
 export default () => {
-    client.connect('localhost:8081', { plaintext: true });
+    client.connect('', { plaintext: true });
 
     // Create the request using the loaded data
     const request = {

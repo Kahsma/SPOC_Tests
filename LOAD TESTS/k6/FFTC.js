@@ -8,8 +8,19 @@ client.load(['definitions'], 'FFT_Convolve.proto');
 const dataX = JSON.parse(open('../signalX.json')); // Cambia la ruta según corresponda
 const dataH = JSON.parse(open('../signalH.json')); // Cambia la ruta según corresponda
 
+export const options = {
+    scenarios: {
+        load_test: {
+            executor: 'per-vu-iterations',
+            vus: 10, // Start with 10 VUs
+            iterations: 5, // Each VU runs a single iteration
+            maxDuration: '30s', // Optional: limit the total duration of the test
+        },
+    },
+};
+
 export default () => {
-    client.connect('localhost:8081', { plaintext: true });
+    client.connect('', { plaintext: true });
 
     // Crear la solicitud usando los datos cargados
     const request = {
@@ -28,7 +39,7 @@ export default () => {
         'status is OK': (r) => r && r.status === StatusOK,
     });
 
-    console.log(JSON.stringify(response.message));
+    //console.log(JSON.stringify(response.message));
 
     client.close();
     sleep(1);
