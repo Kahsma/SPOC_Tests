@@ -36,9 +36,10 @@ def generate_signal(num_values):
 def save_signal_to_json(signal, filename):
     with open(filename, 'w') as f:
         json.dump(signal.to_dict(), f, indent=4)
+signal_name = 'signal.json'
 
 if __name__ == "__main__":
-    num_values = 100  # Number of complex values to generate
+    num_values = 100000  # Number of complex values to generate
     signal = generate_signal(num_values)
-    save_signal_to_json(signal, 'signal.json')
-    print('Signal saved to signal.json')
+    save_signal_to_json(signal, signal_name)
+    print(f'Signal saved to {signal_name}')
